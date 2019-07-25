@@ -16,8 +16,8 @@ export const generateThumbs = functions.storage
         const fileName = filePath.split('/').pop();
         const bucketDir = dirname(filePath);
 
-        const workingDir = join(tmpdir(), 'thubms');
-        const tmpFilePath = join(workingDir, 'source.png');
+        const workingDir = join(tmpdir(), 'thumb');
+        const tmpFilePath = join(workingDir, fileName);
 
         if (fileName.includes('thumb@') || !object.contentType.includes('image')) {
             console.log('exisintg functoin');
@@ -33,7 +33,7 @@ export const generateThumbs = functions.storage
         })
 
         //3. Resize the images and define an array of upload promises
-        const sizes = [64, 256];
+        const sizes = [256];
 
         const uploadPromises = sizes.map(async size => {
             const thumbName = `thumb@${size}_${fileName}`;
